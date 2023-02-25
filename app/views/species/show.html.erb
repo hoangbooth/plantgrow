@@ -1,0 +1,206 @@
+<div>
+  <div>
+    <h1>
+      Species #<%= @the_species.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/species">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_species/<%= @the_species.id %>">
+          Delete species
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Nickname
+      </dt>
+      <dd>
+        <%= @the_species.nickname %>
+      </dd>
+
+      <dt>
+        Cover
+      </dt>
+      <dd>
+        <%= @the_species.cover %>
+      </dd>
+
+      <dt>
+        Location
+      </dt>
+      <dd>
+        <%= @the_species.location %>
+      </dd>
+
+      <dt>
+        Binoname
+      </dt>
+      <dd>
+        <%= @the_species.binoname %>
+      </dd>
+
+      <dt>
+        Difficulty
+      </dt>
+      <dd>
+        <%= @the_species.difficulty %>
+      </dd>
+
+      <dt>
+        Water type
+      </dt>
+      <dd>
+        <%= @the_species.water_type %>
+      </dd>
+
+      <dt>
+        Sun type
+      </dt>
+      <dd>
+        <%= @the_species.sun_type %>
+      </dd>
+
+      <dt>
+        About
+      </dt>
+      <dd>
+        <%= @the_species.about %>
+      </dd>
+
+      <dt>
+        Instruction
+      </dt>
+      <dd>
+        <%= @the_species.instruction %>
+      </dd>
+
+      <dt>
+        Pet friendly
+      </dt>
+      <dd>
+        <%= @the_species.pet_friendly %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_species.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_species.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit species
+    </h2>
+
+    <form action="/modify_species/<%= @the_species.id %>"  method="post" >
+      <div>
+        <label for="nickname_box">
+          Nickname
+        </label>
+
+        <input type="text" id="nickname_box" name="query_nickname" value="<%= @the_species.nickname %>">
+      </div>
+
+      <div>
+        <label for="cover_box">
+          Cover
+        </label>
+
+        <input type="text" id="cover_box" name="query_cover" value="<%= @the_species.cover %>">
+      </div>
+
+      <div>
+        <label for="location_box">
+          Location
+        </label>
+
+        <input type="text" id="location_box" name="query_location" value="<%= @the_species.location %>">
+      </div>
+
+      <div>
+        <label for="binoname_box">
+          Binoname
+        </label>
+
+        <input type="text" id="binoname_box" name="query_binoname" value="<%= @the_species.binoname %>">
+      </div>
+
+      <div>
+        <label for="difficulty_box">
+          Difficulty
+        </label>
+
+        <input type="text" id="difficulty_box" name="query_difficulty" value="<%= @the_species.difficulty %>">
+      </div>
+
+      <div>
+        <label for="water_type_box">
+          Water type
+        </label>
+
+        <input type="text" id="water_type_box" name="query_water_type" value="<%= @the_species.water_type %>">
+      </div>
+
+      <div>
+        <label for="sun_type_box">
+          Sun type
+        </label>
+
+        <input type="text" id="sun_type_box" name="query_sun_type" value="<%= @the_species.sun_type %>">
+      </div>
+
+      <div>
+        <label for="about_box">
+          About
+        </label>
+
+        <input type="text" id="about_box" name="query_about" value="<%= @the_species.about %>">
+      </div>
+
+      <div>
+        <label for="instruction_box">
+          Instruction
+        </label>
+
+        <input type="text" id="instruction_box" name="query_instruction" value="<%= @the_species.instruction %>">
+      </div>
+
+      <div>
+        <input type="checkbox" id="pet_friendly_box" name="query_pet_friendly" value="1" <%= "checked" if @the_species.pet_friendly %>>
+
+        <label for="pet_friendly_box">
+            Pet friendly
+        </label>
+      </div>
+
+      <button>
+        Update species
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

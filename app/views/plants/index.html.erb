@@ -1,0 +1,244 @@
+<div>
+  <div>
+    <h1>
+      List of all plants
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new plant
+    </h2>
+
+    <form action="/insert_plant" method="post">
+      <div>
+        <label for="species_id_box">
+          Species
+        </label>
+
+        <input type="text" id="species_id_box" name="query_species_id">
+      </div>
+
+      <div>
+        <label for="owner_id_box">
+          Owner
+        </label>
+
+        <input type="text" id="owner_id_box" name="query_owner_id">
+      </div>
+
+      <div>
+        <input type="checkbox" id="dead_box" name="query_dead" value="1">
+
+        <label for="dead_box">Dead</label>
+      </div>
+
+      <div>
+        <label for="room_id_box">
+          Room
+        </label>
+
+        <input type="text" id="room_id_box" name="query_room_id">
+      </div>
+
+      <div>
+        <label for="likes_count_box">
+          Likes count
+        </label>
+
+        <input type="text" id="likes_count_box" name="query_likes_count">
+      </div>
+
+      <div>
+        <label for="name_box">
+          Name
+        </label>
+
+        <input type="text" id="name_box" name="query_name">
+      </div>
+
+      <div>
+        <label for="water_interval_box">
+          Water interval
+        </label>
+
+        <input type="text" id="water_interval_box" name="query_water_interval">
+      </div>
+
+      <div>
+        <label for="water_next_at_box">
+          Water next at
+        </label>
+
+        <input type="date" id="water_next_at_box" name="query_water_next_at">
+      </div>
+
+      <div>
+        <label for="likes_count_box">
+          Likes count
+        </label>
+
+        <input type="text" id="likes_count_box" name="query_likes_count">
+      </div>
+
+      <div>
+        <label for="plantphotos_count_box">
+          Plantphotos count
+        </label>
+
+        <input type="text" id="plantphotos_count_box" name="query_plantphotos_count">
+      </div>
+
+      <div>
+        <label for="activities_count_box">
+          Activities count
+        </label>
+
+        <input type="text" id="activities_count_box" name="query_activities_count">
+      </div>
+
+      <button>
+        Create plant
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Species
+        </th>
+
+        <th>
+          Owner
+        </th>
+
+        <th>
+          Dead
+        </th>
+
+        <th>
+          Room
+        </th>
+
+        <th>
+          Likes count
+        </th>
+
+        <th>
+          Name
+        </th>
+
+        <th>
+          Water interval
+        </th>
+
+        <th>
+          Water next at
+        </th>
+
+        <th>
+          Likes count
+        </th>
+
+        <th>
+          Plantphotos count
+        </th>
+
+        <th>
+          Activities count
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_plants.each do |a_plant| %>
+      <tr>
+        <td>
+          <%= a_plant.id %>
+        </td>
+
+        <td>
+          <%= a_plant.species_id %>
+        </td>
+
+        <td>
+          <%= a_plant.owner_id %>
+        </td>
+
+        <td>
+          <%= a_plant.dead %>
+        </td>
+
+        <td>
+          <%= a_plant.room_id %>
+        </td>
+
+        <td>
+          <%= a_plant.likes_count %>
+        </td>
+
+        <td>
+          <%= a_plant.name %>
+        </td>
+
+        <td>
+          <%= a_plant.water_interval %>
+        </td>
+
+        <td>
+          <%= a_plant.water_next_at %>
+        </td>
+
+        <td>
+          <%= a_plant.likes_count %>
+        </td>
+
+        <td>
+          <%= a_plant.plantphotos_count %>
+        </td>
+
+        <td>
+          <%= a_plant.activities_count %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_plant.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_plant.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/plants/<%= a_plant.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

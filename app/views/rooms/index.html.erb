@@ -1,0 +1,118 @@
+<div>
+  <div>
+    <h1>
+      List of all rooms
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new room
+    </h2>
+
+    <form action="/insert_room" method="post">
+      <div>
+        <label for="roomtype_box">
+          Roomtype
+        </label>
+
+        <input type="text" id="roomtype_box" name="query_roomtype">
+      </div>
+
+      <div>
+        <label for="roomname_box">
+          Roomname
+        </label>
+
+        <input type="text" id="roomname_box" name="query_roomname">
+      </div>
+
+      <div>
+        <label for="owner_id_box">
+          Owner
+        </label>
+
+        <input type="text" id="owner_id_box" name="query_owner_id">
+      </div>
+
+      <button>
+        Create room
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Roomtype
+        </th>
+
+        <th>
+          Roomname
+        </th>
+
+        <th>
+          Owner
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_rooms.each do |a_room| %>
+      <tr>
+        <td>
+          <%= a_room.id %>
+        </td>
+
+        <td>
+          <%= a_room.roomtype %>
+        </td>
+
+        <td>
+          <%= a_room.roomname %>
+        </td>
+
+        <td>
+          <%= a_room.owner_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_room.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_room.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/rooms/<%= a_room.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

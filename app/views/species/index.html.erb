@@ -1,0 +1,228 @@
+<div>
+  <div>
+    <h1>
+      List of all species
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new species
+    </h2>
+
+    <form action="/insert_species" method="post">
+      <div>
+        <label for="nickname_box">
+          Nickname
+        </label>
+
+        <input type="text" id="nickname_box" name="query_nickname">
+      </div>
+
+      <div>
+        <label for="cover_box">
+          Cover
+        </label>
+
+        <input type="text" id="cover_box" name="query_cover">
+      </div>
+
+      <div>
+        <label for="location_box">
+          Location
+        </label>
+
+        <input type="text" id="location_box" name="query_location">
+      </div>
+
+      <div>
+        <label for="binoname_box">
+          Binoname
+        </label>
+
+        <input type="text" id="binoname_box" name="query_binoname">
+      </div>
+
+      <div>
+        <label for="difficulty_box">
+          Difficulty
+        </label>
+
+        <input type="text" id="difficulty_box" name="query_difficulty">
+      </div>
+
+      <div>
+        <label for="water_type_box">
+          Water type
+        </label>
+
+        <input type="text" id="water_type_box" name="query_water_type">
+      </div>
+
+      <div>
+        <label for="sun_type_box">
+          Sun type
+        </label>
+
+        <input type="text" id="sun_type_box" name="query_sun_type">
+      </div>
+
+      <div>
+        <label for="about_box">
+          About
+        </label>
+
+        <input type="text" id="about_box" name="query_about">
+      </div>
+
+      <div>
+        <label for="instruction_box">
+          Instruction
+        </label>
+
+        <input type="text" id="instruction_box" name="query_instruction">
+      </div>
+
+      <div>
+        <input type="checkbox" id="pet_friendly_box" name="query_pet_friendly" value="1">
+
+        <label for="pet_friendly_box">Pet friendly</label>
+      </div>
+
+      <button>
+        Create species
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Nickname
+        </th>
+
+        <th>
+          Cover
+        </th>
+
+        <th>
+          Location
+        </th>
+
+        <th>
+          Binoname
+        </th>
+
+        <th>
+          Difficulty
+        </th>
+
+        <th>
+          Water type
+        </th>
+
+        <th>
+          Sun type
+        </th>
+
+        <th>
+          About
+        </th>
+
+        <th>
+          Instruction
+        </th>
+
+        <th>
+          Pet friendly
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_species.each do |a_species| %>
+      <tr>
+        <td>
+          <%= a_species.id %>
+        </td>
+
+        <td>
+          <%= a_species.nickname %>
+        </td>
+
+        <td>
+          <%= a_species.cover %>
+        </td>
+
+        <td>
+          <%= a_species.location %>
+        </td>
+
+        <td>
+          <%= a_species.binoname %>
+        </td>
+
+        <td>
+          <%= a_species.difficulty %>
+        </td>
+
+        <td>
+          <%= a_species.water_type %>
+        </td>
+
+        <td>
+          <%= a_species.sun_type %>
+        </td>
+
+        <td>
+          <%= a_species.about %>
+        </td>
+
+        <td>
+          <%= a_species.instruction %>
+        </td>
+
+        <td>
+          <%= a_species.pet_friendly %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_species.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_species.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/species/<%= a_species.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
