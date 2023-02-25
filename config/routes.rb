@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-
+  get("/", { :controller => "plants", :action => "index" })
 
   # Routes for the Like resource:
 
@@ -75,6 +75,7 @@ Rails.application.routes.draw do
   
   # DELETE
   get("/delete_plant/:path_id", { :controller => "plants", :action => "destroy" })
+
 
   #------------------------------
 

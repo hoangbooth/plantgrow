@@ -1,6 +1,6 @@
 class PlantsController < ApplicationController
   def index
-    matching_plants = Plant.all
+    matching_plants = @current_user.own_plants.all
 
     @list_of_plants = matching_plants.order({ :created_at => :desc })
 
@@ -20,15 +20,17 @@ class PlantsController < ApplicationController
   def create
     the_plant = Plant.new
     the_plant.species_id = params.fetch("query_species_id")
-    the_plant.owner_id = params.fetch("query_owner_id")
-    the_plant.dead = params.fetch("query_dead", false)
+    the_plant.owner_id = @current_user.id
+   
     the_plant.room_id = params.fetch("query_room_id")
     the_plant.name = params.fetch("query_name")
-    the_plant.water_interval = params.fetch("query_water_interval")
-    the_plant.water_next_at = params.fetch("query_water_next_at")
-    the_plant.likes_count = params.fetch("query_likes_count")
-    the_plant.plantphotos_count = params.fetch("query_plantphotos_count")
-    the_plant.activities_count = params.fetch("query_activities_count")
+    
+    # the_plant.water_interval = params.fetch("query_water_interval")
+    # the_plant.water_next_at = params.fetch("query_water_next_at")
+    # the_plant.likes_count = params.fetch("query_likes_count")
+    # the_plant.plantphotos_count = params.fetch("query_plantphotos_count")
+    # the_plant.activities_count = params.fetch("query_activities_count")
+    # the_plant.dead = params.fetch("query_dead", false)
 
     if the_plant.valid?
       the_plant.save

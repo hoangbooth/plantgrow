@@ -16,6 +16,64 @@
   </head>
 
   <body>
+
+<% if alert.present? %>
+  <div style="color: red;" >
+    <%= alert %>
+  </div>
+<% end %>
+
+<% if notice.present? %>
+  <div style="color: green;">
+    <%= notice %>
+  </div>
+<% end %>
+
+    <nav>
+      <ul>
+
+<%# old style%>
+<%#session.fetch(:user_id)%> 
+
+      <% if @current_user == nil %>
+          
+          <li>
+            <a href="/user_sign_in">
+              Sign in
+            </a>
+          </li>
+          <li>
+            <a href="/user_sign_up">
+              Sign up
+            </a>
+          </li>
+
+      <% else %>
+          <li>
+            <a href="/user_sign_out">
+              Sign out
+            </a>
+          </li>
+          <li>
+            <a href="/plants">
+               <%= @current_user.username %> 's Plants
+            </a>
+          </li>
+      <% end %>
+
+        <li>
+          <a href="/species">
+            Species
+          </a>
+        </li>
+        <li>
+          <a href="/">
+            Home
+          </a>
+        </li>
+      </ul>
+    </nav>
+
     <%= yield %>
   </body>
 </html>
