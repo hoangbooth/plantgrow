@@ -1,6 +1,7 @@
 class PlantsController < ApplicationController
   def index
-    matching_plants = @current_user.own_plants.all
+     matching_plants = @current_user.own_plants
+    # matching_plants = Plant.all
 
     @list_of_plants = matching_plants.order({ :created_at => :desc })
 

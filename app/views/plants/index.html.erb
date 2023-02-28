@@ -20,15 +20,16 @@
           Species
         </label>
 
-        <input type="text" id="species_id_box" name="query_species_id">
-      </div>
+          <select id="species_id_box" name="query_species_id">
+            <% Species.all.each do |a_species| %>
+              <option value="<%= a_species.id %>">
+                <%= a_species.binoname %> (<%= a_species.nickname %>)
+              </option>
+            <% end %>
+          </select>
+        
 
-      <div>
-        <label for="owner_id_box">
-          Owner
-        </label>
-
-        <input type="text" id="owner_id_box" name="query_owner_id">
+        <%# <input type="text" id="species_id_box" name="query_species_id"> %>
       </div>
 
       <div>
@@ -36,7 +37,15 @@
           Room
         </label>
 
-        <input type="text" id="room_id_box" name="query_room_id">
+       <select id="room_id_box" name="query_room_id">
+            <% Room.all.each do |a_room| %>
+              <option value="<%= a_room.id %>">
+                <%= a_room.roomname %> (<%= a_room.roomtype %>)
+              </option>
+            <% end %>
+          </select>
+       
+       <%# <input type="text" id="room_id_box" name="query_room_id"> %>
       </div>
 
       <div>
@@ -59,9 +68,6 @@
   <div>
     <table border="1">
       <tr>
-        <th>
-          ID
-        </th>
 
         <th>
           Species
@@ -72,43 +78,11 @@
         </th>
 
         <th>
-          Likes count
-        </th>
-
-        <th>
           Name
         </th>
-
+        
         <th>
-          Owner
-        </th>
-
-        <th>
-          Water interval
-        </th>
-
-        <th>
-          Water next at
-        </th>
-
-        <th>
-          Likes count
-        </th>
-
-        <th>
-          Plantphotos count
-        </th>
-
-        <th>
-          Activities count
-        </th>
-
-        <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
+          Cover Photo
         </th>
 
         <th>
@@ -118,19 +92,15 @@
       <% @list_of_plants.each do |a_plant| %>
       <tr>
         <td>
-          <%= a_plant.id %>
-        </td>
-
-        <td>
           <%= a_plant.species.nickname %>
         </td>
 
         <td>
-          <%= a_plant.room_id %>
-        </td>
-
-        <td>
-          <%= a_plant.likes_count %>
+          <% if a_plant.room == nil %>
+            Unknown room
+          <% else %>
+            <%= a_plant.room.roomname %>
+          <% end %>
         </td>
 
         <td>
@@ -138,34 +108,7 @@
         </td>
 
         <td>
-          <%= a_plant.owner.username %>
-        </td>
-
-        <td>
-          <%= a_plant.water_interval %>
-        </td>
-
-        <td>
-          <%= a_plant.water_next_at %>
-        </td>
-
-        <td>
-          <%= a_plant.likes_count %>
-        </td>
-
-        <td>
-          <%= a_plant.plantphotos_count %>
-        </td>
-
-        <td>
-          <%= a_plant.activities_count %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(a_plant.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_plant.updated_at) %> ago
+          <img src="<%= a_plant.species.cover %>" style="width:48px;height:48px"></img>
         </td>
 
         <td>

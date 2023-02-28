@@ -1,8 +1,11 @@
 class RoomsController < ApplicationController
   def index
-    matching_rooms = Room.all
+    matching_rooms = @current_user.rooms
 
     @list_of_rooms = matching_rooms.order({ :created_at => :desc })
+
+    @room_type = Array.new
+    @room_type = ["Balcony", "Bathroom", "Bedroom", "Dining Room", "Hall", "Kitchen"]
 
     render({ :template => "rooms/index.html.erb" })
   end
@@ -21,7 +24,7 @@ class RoomsController < ApplicationController
     the_room = Room.new
     the_room.roomtype = params.fetch("query_roomtype")
     the_room.roomname = params.fetch("query_roomname")
-    the_room.owner_id = params.fetch("query_owner_id")
+    the_room.owner_id = @current_user.id
 
     if the_room.valid?
       the_room.save

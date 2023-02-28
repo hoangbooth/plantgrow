@@ -1,7 +1,7 @@
 <div>
   <div>
     <h1>
-      List of all rooms
+      My rooms
     </h1>
   </div>
 </div>
@@ -19,8 +19,13 @@
         <label for="roomtype_box">
           Roomtype
         </label>
+        <select id="roomtype_box" name="query_roomtype">
+          <% @room_type.each do |a_type| %>
+            <option><%= a_type %></option>
+          <% end %>
+        </select>
 
-        <input type="text" id="roomtype_box" name="query_roomtype">
+        <%# <input type="text" id="roomtype_box" name="query_roomtype"> %>
       </div>
 
       <div>
@@ -28,15 +33,7 @@
           Roomname
         </label>
 
-        <input type="text" id="roomname_box" name="query_roomname">
-      </div>
-
-      <div>
-        <label for="owner_id_box">
-          Owner
-        </label>
-
-        <input type="text" id="owner_id_box" name="query_owner_id">
+        <input type="text" id="roomname_box" name="query_roomname" placeholder="Name your room">
       </div>
 
       <button>
