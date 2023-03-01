@@ -54,3 +54,6 @@ end
 group :production do
   gem 'pg'
 end
+
+gem 'jquery-rails'
+gem 'turbolinks', '~> 5'

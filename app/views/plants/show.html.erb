@@ -130,7 +130,7 @@
           Care at
         </label>
 
-        <input type="datetime-local" id="care_at_box" name="query_care_at">
+        <input type="datetime-local" id="care_at_box" name="query_care_at" value="<%= Date.today %>">
       </div>
 
       <div>
@@ -366,3 +366,5 @@
           Delete plant
         </a>
       </div>
+
+      <%= link_to "Delete plant 2", "/", data: { confirm: "Are you sure" } %>
