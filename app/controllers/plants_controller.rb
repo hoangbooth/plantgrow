@@ -1,10 +1,7 @@
 class PlantsController < ApplicationController
   def index
-     matching_plants = @current_user.own_plants
-    # matching_plants = Plant.all
+    
 
-    @list_of_plants = matching_plants.where({ :dead => "false" }).order({ :created_at => :desc })
-    @list_of_dead_plants = matching_plants.where({ :dead => "true" }).order({ :created_at => :desc })
 
   
 

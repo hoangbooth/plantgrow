@@ -23,7 +23,7 @@ class ActivitiesController < ApplicationController
     the_activity.note = params.fetch("query_note")
     the_activity.plant_id = params.fetch("query_plant_id")
     the_activity.care_at = params.fetch("query_care_at")
-    the_activity.owner_id = params.fetch("query_owner_id")
+    the_activity.owner_id = @current_user.id
 
     if the_activity.valid?
       the_activity.save
@@ -32,6 +32,31 @@ class ActivitiesController < ApplicationController
       redirect_to("/plants/" + the_activity.plant_id.to_s, { :alert => the_activity.errors.full_messages.to_sentence })
     end
   end
+
+
+  def bulk_create
+    
+    @list_of_plants.each do |a_plant|
+      
+      if params.has_key?(a_plant.id.to_s)
+
+        the_activity = Activity.new
+        the_activity.care_type = params.fetch("query_care_type")
+        the_activity.plant_id = a_plant.id
+        the_activity.care_at = Time.now
+        the_activity.owner_id = @current_user.id
+      # params.fetch("query_care_at")
+        if the_activity.valid?
+          the_activity.save
+        else
+          redirect_to("/", { :alert => the_activity.errors.full_messages.to_sentence })
+        end
+      end
+    end
+
+    redirect_to("/", { :notice => "Activity created successfully." })
+  end
+
 
   def update
     the_id = params.fetch("path_id")

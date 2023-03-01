@@ -44,7 +44,8 @@ Rails.application.routes.draw do
 
   # CREATE
   post("/insert_activity", { :controller => "activities", :action => "create" })
-          
+  post("/bulk_insert_activity", { :controller => "activities", :action => "bulk_create"})        
+
   # READ
   get("/activities", { :controller => "activities", :action => "index" })
   

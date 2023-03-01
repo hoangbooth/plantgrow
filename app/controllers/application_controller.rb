@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   before_action(:load_current_user)
   before_action(:load_room_type)
   before_action(:load_activity_type)
+  before_action(:load_all_plants)
   # Uncomment line 5 in this file and line 3 in UserAuthenticationController if you want to force users to sign in before any other actions.
   # before_action(:force_user_sign_in)
   
@@ -21,7 +22,14 @@ class ApplicationController < ActionController::Base
     @activity_type = ["Water", "Fertilize", "Repot", "Mist", "Rotate"]
   end
 
+  def load_all_plants
+    matching_plants = @current_user.own_plants
+    # matching_plants = Plant.all
 
+    @list_of_plants = matching_plants.where({ :dead => "false" }).order({ :created_at => :desc })
+
+    @list_of_dead_plants = matching_plants.where({ :dead => "true" }).order({ :created_at => :desc })
+  end
 
   def force_user_sign_in
     if @current_user == nil
@@ -32,6 +40,7 @@ class ApplicationController < ActionController::Base
   def index
     render({ :template => "index.html.erb"})
   end
+
 
 
 end
