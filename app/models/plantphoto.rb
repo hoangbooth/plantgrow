@@ -16,6 +16,6 @@ class Plantphoto < ApplicationRecord
   belongs_to(:owner, { :required => true, :class_name => "User", :foreign_key => "owner_id", :counter_cache => true })
   belongs_to(:plant, { :required => true, :class_name => "Plant", :foreign_key => "plant_id", :counter_cache => true })
 
-  
+  mount_uploader :image, ImageUploader
 
 end
