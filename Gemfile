@@ -57,3 +57,7 @@ end
 
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
+
+#Image Upload https://chapters.firstdraft.com/chapters/790
+gem "carrierwave"
+gem "cloudinary"
