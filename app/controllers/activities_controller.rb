@@ -1,10 +1,17 @@
 class ActivitiesController < ApplicationController
+  before_action(:force_user_sign_in)
+
+
   def index
-    matching_activities = Activity.all
+    if @current_user.id != 1
+      redirect_to("/", { :alert => "You dont have permission to access this page" })
+    else
+      matching_activities = Activity.all
 
-    @list_of_activities = matching_activities.order({ :created_at => :desc })
+      @list_of_activities = matching_activities.order({ :created_at => :desc })
 
-    render({ :template => "activities/index.html.erb" })
+      render({ :template => "activities/index.html.erb" })
+    end
   end
 
   def show

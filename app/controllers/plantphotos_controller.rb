@@ -1,10 +1,18 @@
 class PlantphotosController < ApplicationController
+  before_action(:force_user_sign_in)
+  
+
   def index
-    matching_plantphotos = Plantphoto.all
+    if @current_user.id != 1
+      redirect_to("/", { :alert => "You dont have permission to access this page" })
+    else
+      matching_plantphotos = Plantphoto.all
 
     @list_of_plantphotos = matching_plantphotos.order({ :created_at => :desc })
 
     render({ :template => "plantphotos/index.html.erb" })
+    end
+    
   end
 
   def show

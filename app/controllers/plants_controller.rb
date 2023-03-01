@@ -1,10 +1,8 @@
 class PlantsController < ApplicationController
-  def index
-    
-
-
+  before_action(:force_user_sign_in)
   
-
+  
+  def index
     render({ :template => "plants/index.html.erb" })
   end
 
@@ -22,10 +20,25 @@ class PlantsController < ApplicationController
     the_plant = Plant.new
     the_plant.species_id = params.fetch("query_species_id")
     the_plant.owner_id = @current_user.id
-   
-    the_plant.room_id = params.fetch("query_room_id")
-    the_plant.name = params.fetch("query_name")
     
+    if params.has_key?("query_room_id")
+      the_plant.room_id = params["query_room_id"]
+    else
+      new_room = Room.new
+      new_room.roomtype = "Unknown Room"
+      new_room.roomname = "Unnamed Room"
+      new_room.owner_id = @current_user.id
+      new_room.save
+      the_plant.room_id = new_room.id
+    
+    end
+    
+    if params.fetch("query_name").blank?
+      the_plant.name = the_plant.species.binoname
+    else
+      the_plant.name = params.fetch("query_name")
+    end
+
     # the_plant.water_interval = params.fetch("query_water_interval")
     # the_plant.water_next_at = params.fetch("query_water_next_at")
     # the_plant.likes_count = params.fetch("query_likes_count")

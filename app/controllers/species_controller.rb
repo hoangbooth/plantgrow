@@ -1,5 +1,9 @@
 class SpeciesController < ApplicationController
+  before_action(:force_user_sign_in)
+  before_action(:check_admin)
+
   def index
+
     matching_species = Species.all
 
     @list_of_species = matching_species.order({ :created_at => :desc })

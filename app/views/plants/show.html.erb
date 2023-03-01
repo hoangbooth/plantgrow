@@ -333,7 +333,7 @@
               <%= @the_plant.room.roomname %> (<%= @the_plant.room.roomtype %>)
             </option>
             
-            <% Room.where.not({:id => @the_plant.room.id}).each do |a_room| %>
+            <% @current_user.rooms.where.not({:id => @the_plant.room.id}).each do |a_room| %>
               <option value="<%= a_room.id %>">
                 <%= a_room.roomname %> (<%= a_room.roomtype %>)
               </option>

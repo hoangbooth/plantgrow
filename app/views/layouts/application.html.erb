@@ -30,11 +30,19 @@
 <% end %>
 
     <nav>
+
+    <h3>User Menu</h3>
       <ul>
 
 <%# old style%>
 <%#session.fetch(:user_id)%> 
-
+ 
+        <li>
+          <a href="/">
+            Home
+          </a>
+        </li>
+      
       <% if @current_user == nil %>
           
           <li>
@@ -64,21 +72,36 @@
             My rooms
           </a>
         </li>
-      <% end %>
+      
+</ul>
+     
 
+  <% if @current_user.id == 1 %>
+    <h3>Admin Menu</h3>
+     <ul>
         <li>
           <a href="/species">
             Species
           </a>
         </li>
-        <li>
-          <a href="/">
-            Home
+         <li>
+          <a href="/plantphotos">
+            Photos
           </a>
         </li>
-      </ul>
+         <li>
+          <a href="/activities">
+            Activities
+          </a>
+        </li>
+      <ul>
+    <% end %>
+  
+  <% end %>  
     </nav>
+      
 
+<br>
     <%= yield %>
   </body>
 </html>

@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   
   def load_room_type
     @room_type = Array.new
-    @room_type = ["Balcony", "Bathroom", "Bedroom", "Dining Room", "Hall", "Kitchen"]
+    @room_type = ["Balcony", "Bathroom", "Bedroom", "Dining Room", "Hall", "Kitchen", "Unknown Room"]
   end
 
   def load_activity_type
@@ -23,12 +23,15 @@ class ApplicationController < ActionController::Base
   end
 
   def load_all_plants
-    matching_plants = @current_user.own_plants
-    # matching_plants = Plant.all
+    if @current_user != nil
 
-    @list_of_plants = matching_plants.where({ :dead => "false" }).order({ :created_at => :desc })
+      matching_plants = @current_user.own_plants
+      # matching_plants = Plant.all
 
-    @list_of_dead_plants = matching_plants.where({ :dead => "true" }).order({ :created_at => :desc })
+      @list_of_plants = matching_plants.where({ :dead => "false" }).order({ :created_at => :desc })
+
+      @list_of_dead_plants = matching_plants.where({ :dead => "true" }).order({ :created_at => :desc })
+    end
   end
 
   def force_user_sign_in
@@ -37,7 +40,17 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def check_admin
+    if @current_user.id != 1
+      redirect_to("/", { :alert => "You dont have permission to access this page" })
+    end
+
+
+end
+
   def index
+    @all_species = Species.all
+    @random_plant = @all_species.sample
     render({ :template => "index.html.erb"})
   end
 

@@ -1,4 +1,7 @@
 class LikesController < ApplicationController
+  before_action(:force_user_sign_in)
+  before_action(:check_admin)
+  
   def index
     matching_likes = Like.all
 

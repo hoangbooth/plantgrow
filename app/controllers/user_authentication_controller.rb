@@ -42,16 +42,17 @@ class UserAuthenticationController < ApplicationController
     @user.password = params.fetch("query_password")
     @user.password_confirmation = params.fetch("query_password_confirmation")
     @user.username = params.fetch("query_username")
-    @user.bio = params.fetch("query_bio")
-    @user.city = params.fetch("query_city")
-    @user.name = params.fetch("query_name")
-    @user.profilepic = params.fetch("query_profilepic")
-    @user.private = params.fetch("query_private", false)
-    @user.sent_follow_requests_count = params.fetch("query_sent_follow_requests_count")
-    @user.received_follow_requests_count = params.fetch("query_received_follow_requests_count")
-    @user.own_plants_count = params.fetch("query_own_plants_count")
-    @user.plantphotos_count = params.fetch("query_plantphotos_count")
-    @user.activities_count = params.fetch("query_activities_count")
+    
+    # @user.bio = params.fetch("query_bio")
+    # @user.city = params.fetch("query_city")
+    # @user.name = params.fetch("query_name")
+    # @user.profilepic = params.fetch("query_profilepic")
+    # @user.private = params.fetch("query_private", false)
+    # @user.sent_follow_requests_count = params.fetch("query_sent_follow_requests_count")
+    # @user.received_follow_requests_count = params.fetch("query_received_follow_requests_count")
+    # @user.own_plants_count = params.fetch("query_own_plants_count")
+    # @user.plantphotos_count = params.fetch("query_plantphotos_count")
+    # @user.activities_count = params.fetch("query_activities_count")
 
     save_status = @user.save
 

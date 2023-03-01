@@ -1,4 +1,8 @@
 class FollowRequestsController < ApplicationController
+  before_action(:force_user_sign_in)
+  before_action(:check_admin)
+
+  
   def index
     matching_follow_requests = FollowRequest.all
 

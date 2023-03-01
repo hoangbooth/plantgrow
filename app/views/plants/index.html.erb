@@ -36,15 +36,17 @@
         <label for="room_id_box">
           Room
         </label>
-
-       <select id="room_id_box" name="query_room_id">
-            <% Room.all.each do |a_room| %>
+      <% if @current_user.rooms.length == 0 %>
+        : <a href="/rooms"> Add a new room first</a>
+      <% else %>
+          <select id="room_id_box" name="query_room_id">
+            <% @current_user.rooms.each do |a_room| %>
               <option value="<%= a_room.id %>">
                 <%= a_room.roomname %> (<%= a_room.roomtype %>)
               </option>
             <% end %>
           </select>
-       
+      <% end %> 
        <%# <input type="text" id="room_id_box" name="query_room_id"> %>
       </div>
 
