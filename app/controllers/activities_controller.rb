@@ -29,7 +29,13 @@ class ActivitiesController < ApplicationController
     the_activity.care_type = params.fetch("query_care_type")
     the_activity.note = params.fetch("query_note")
     the_activity.plant_id = params.fetch("query_plant_id")
-    the_activity.care_at = params.fetch("query_care_at")
+    
+    if params.fetch("query_care_at").blank?
+      the_activity.care_at = Time.now
+    else
+      the_activity.care_at = params.fetch("query_care_at")
+    end
+    
     the_activity.owner_id = @current_user.id
 
     if the_activity.valid?

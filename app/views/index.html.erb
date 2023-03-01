@@ -21,50 +21,55 @@
  
 
 <% else %>
+  <% if @list_of_plants.length == 0 %>
+          You don't have any plants. <a href="/plants">Add a new plant to your garden!</a>
+  <% else %>
+    <h2>
+      Your tasks
+    </h2>
 
-  <h2>
-    Your tasks
-  </h2>
 
-
-    <div>
-    <form action="/bulk_insert_activity" method="post">
       <div>
-      <label for="care_type_box">
-            Select your task
-          </label>
+      <form action="/bulk_insert_activity" method="post">
+        <div>
+        <label for="care_type_box">
+              Select your task
+            </label>
 
-          <select id="care_type_box" name="query_care_type">
-            <% @activity_type.each do |a_type| %>
-              <option><%= a_type %></option>
-            <% end %>
-          </select>
-      </div>  
-      <br>
-      <div>
-      
-      <table border="1">
-        <% @list_of_plants.each do |a_plant| %>
-        <tr>
+            <select id="care_type_box" name="query_care_type">
+              <% @activity_type.each do |a_type| %>
+                <option><%= a_type %></option>
+              <% end %>
+            </select>
+        </div>  
+        <br>
+        <div>
+        <div>
+        
+        
+        </div>
+        <table border="1">
+          <% @list_of_plants.each do |a_plant| %>
+          <tr>
+              <td>
+              <img src="<%= a_plant.species.cover %>" style="width:48px;height:48px"></img>
+            </td>
             <td>
-            <img src="<%= a_plant.species.cover %>" style="width:48px;height:48px"></img>
-          </td>
-          <td>
-            <label for="<%= a_plant.id %>"></label>
-            <%= a_plant.name %>
-          </td>
-          <td>
-            <input type="checkbox" id="<%= a_plant.id %>" name="<%= a_plant.id.to_s %>" value="yes">
-          </td>
-        </tr>
-        <% end %>
-      </table>
-      </div>
-      <div>
-      <br>
-      <input type="submit" id="submit_button" value="Finish all tasks">
-      </div>
-  </form>
-  </div>
-
+              <label for="<%= a_plant.id %>"></label>
+              <%= a_plant.name %>
+            </td>
+            <td>
+              <input type="checkbox" id="<%= a_plant.id %>" name="<%= a_plant.id.to_s %>" value="yes">
+            </td>
+          </tr>
+          <% end %>
+        </table>
+        </div>
+        <div>
+        <br>
+        <input type="submit" id="submit_button" value="Finish all tasks">
+        </div>
+    </form>
+    </div>
+  <% end %>
 <% end %>
