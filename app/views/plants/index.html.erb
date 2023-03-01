@@ -55,7 +55,9 @@
 
         <input type="text" id="name_box" name="query_name">
       </div>
-     
+     <div>
+        <input type="hidden" id="dead_box" name="query_dead" value="false">
+      </div>
       <button>
         Create plant
       </button>
@@ -65,6 +67,7 @@
 
 <hr>
 <div>
+  <h3>My current plants</h3>
   <div>
     <table border="1">
       <tr>
@@ -92,7 +95,7 @@
       <% @list_of_plants.each do |a_plant| %>
       <tr>
         <td>
-          <%= a_plant.species.nickname %>
+          <%= a_plant.species.binoname %>
         </td>
 
         <td>
@@ -123,3 +126,61 @@
 </div>
 
 <hr>
+<div>
+  <h3>My dead plants</h3>
+  <div>
+    <table border="1">
+      <tr>
+
+        <th>
+          Species
+        </th>
+
+        <th>
+          Room
+        </th>
+
+        <th>
+          Name
+        </th>
+        
+        <th>
+          Cover Photo
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_dead_plants.each do |a_plant| %>
+      <tr>
+        <td>
+          <%= a_plant.species.binoname %>
+        </td>
+
+        <td>
+          <% if a_plant.room == nil %>
+            Unknown room
+          <% else %>
+            <%= a_plant.room.roomname %>
+          <% end %>
+        </td>
+
+        <td>
+          <%= a_plant.name %>
+        </td>
+
+        <td>
+          <img src="<%= a_plant.species.cover %>" style="width:48px;height:48px"></img>
+        </td>
+
+        <td>
+          <a href="/plants/<%= a_plant.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

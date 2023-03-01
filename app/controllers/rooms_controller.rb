@@ -4,8 +4,7 @@ class RoomsController < ApplicationController
 
     @list_of_rooms = matching_rooms.order({ :created_at => :desc })
 
-    @room_type = Array.new
-    @room_type = ["Balcony", "Bathroom", "Bedroom", "Dining Room", "Hall", "Kitchen"]
+  
 
     render({ :template => "rooms/index.html.erb" })
   end

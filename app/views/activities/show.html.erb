@@ -6,16 +6,12 @@
 
     <div>
       <div>
-        <a href="/activities">
+        <a href="/plants/<%= @the_activity.plant_id %>">
           Go back
         </a>
       </div>
 
-      <div>
-        <a href="/delete_activity/<%= @the_activity.id %>">
-          Delete activity
-        </a>
-      </div>
+    
     </div>
 
     <dl>
@@ -72,61 +68,8 @@
 </div>
 
 <hr>
-
-
-<div>
   <div>
-    <h2>
-      Edit activity
-    </h2>
-
-    <form action="/modify_activity/<%= @the_activity.id %>"  method="post" >
-      <div>
-        <label for="care_type_box">
-          Care type
-        </label>
-
-        <input type="text" id="care_type_box" name="query_care_type" value="<%= @the_activity.care_type %>">
+        <a href="/delete_activity/<%= @the_activity.id %>">
+          Delete activity
+        </a>
       </div>
-
-      <div>
-        <label for="note_box">
-          Note
-        </label>
-
-        <textarea id="note_box" name="query_note"><%= @the_activity.note %></textarea>
-      </div>
-
-      <div>
-        <label for="plant_id_box">
-          Plant
-        </label>
-
-        <input type="text" id="plant_id_box" name="query_plant_id" value="<%= @the_activity.plant_id %>">
-      </div>
-
-      <div>
-        <label for="care_at_box">
-          Care at
-        </label>
-
-        <input type="datetime-local" id="care_at_box" name="query_care_at"
-         value="<%= @the_activity.care_at %>">
-      </div>
-
-      <div>
-        <label for="owner_id_box">
-          Owner
-        </label>
-
-        <input type="text" id="owner_id_box" name="query_owner_id" value="<%= @the_activity.owner_id %>">
-      </div>
-
-      <button>
-        Update activity
-      </button>
-    </form>
-  </div>
-</div>
-
-<hr>

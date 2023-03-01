@@ -27,9 +27,9 @@ class ActivitiesController < ApplicationController
 
     if the_activity.valid?
       the_activity.save
-      redirect_to("/activities", { :notice => "Activity created successfully." })
+      redirect_to("/plants/" + the_activity.plant_id.to_s, { :notice => "Activity created successfully." })
     else
-      redirect_to("/activities", { :alert => the_activity.errors.full_messages.to_sentence })
+      redirect_to("/plants/" + the_activity.plant_id.to_s, { :alert => the_activity.errors.full_messages.to_sentence })
     end
   end
 

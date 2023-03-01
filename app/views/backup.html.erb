@@ -1,0 +1,283 @@
+  <div>
+        <label for="water_interval_box">
+          Water interval
+        </label>
+
+        <input type="text" id="water_interval_box" name="query_water_interval" value="<%= @the_plant.water_interval %>">
+      </div>
+
+      <div>
+        <label for="water_next_at_box">
+          Water next at
+        </label>
+
+        <input type="date" id="water_next_at_box" name="query_water_next_at" value="<%= @the_plant.water_next_at %>">
+      </div>
+
+
+
+
+Activity Edit
+
+
+<div>
+  <div>
+    <h2>
+      Edit activity
+    </h2>
+
+    <form action="/modify_activity/<%= @the_activity.id %>"  method="post" >
+      <div>
+        <label for="care_type_box">
+          Care type
+        </label>
+
+        <input type="text" id="care_type_box" name="query_care_type" value="<%= @the_activity.care_type %>">
+      </div>
+
+      <div>
+        <label for="note_box">
+          Note
+        </label>
+
+        <textarea id="note_box" name="query_note"><%= @the_activity.note %></textarea>
+      </div>
+
+      <div>
+        <label for="plant_id_box">
+          Plant
+        </label>
+
+        <input type="text" id="plant_id_box" name="query_plant_id" value="<%= @the_activity.plant_id %>">
+      </div>
+
+      <div>
+        <label for="care_at_box">
+          Care at
+        </label>
+
+        <input type="datetime-local" id="care_at_box" name="query_care_at"
+         value="<%= @the_activity.care_at %>">
+      </div>
+
+      <div>
+        <label for="owner_id_box">
+          Owner
+        </label>
+
+        <input type="text" id="owner_id_box" name="query_owner_id" value="<%= @the_activity.owner_id %>">
+      </div>
+
+      <button>
+        Update activity
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+
+
+
+
+<h3>All photos</h3>
+
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Image
+        </th>
+
+        <th>
+          Caption
+        </th>
+
+        <th>
+          Plant
+        </th>
+
+        <th>
+          Owner
+        </th>
+
+        <th>
+          Cover
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @the_plant.plantphotos.each do |a_plantphoto| %>
+      <tr>
+        <td>
+          <%= a_plantphoto.id %>
+        </td>
+
+        <td>
+          <img src="<%= a_plantphoto.image %>" style="width:150px;height:150px;"></img>
+        </td>
+
+        <td>
+          <%= a_plantphoto.caption %>
+        </td>
+
+        <td>
+          <%= a_plantphoto.plant_id %>
+        </td>
+
+        <td>
+          <%= a_plantphoto.owner_id %>
+        </td>
+
+        <td>
+          <%= a_plantphoto.cover %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_plantphoto.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_plantphoto.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/plantphotos/<%= a_plantphoto.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+
+
+
+<div>
+  <div>
+    <h2>
+      Edit plantphoto
+    </h2>
+
+    <form action="/modify_plantphoto/<%= @the_plantphoto.id %>"  method="post" >
+      <div>
+        <label for="image_box">
+          Image
+        </label>
+
+        <input type="text" id="image_box" name="query_image" value="<%= @the_plantphoto.image %>">
+      </div>
+
+      <div>
+        <label for="caption_box">
+          Caption
+        </label>
+
+        <input type="text" id="caption_box" name="query_caption" value="<%= @the_plantphoto.caption %>">
+      </div>
+
+      <div>
+        <label for="plant_id_box">
+          Plant
+        </label>
+
+        <input type="text" id="plant_id_box" name="query_plant_id" value="<%= @the_plantphoto.plant_id %>">
+      </div>
+
+      <div>
+        <label for="owner_id_box">
+          Owner
+        </label>
+
+        <input type="text" id="owner_id_box" name="query_owner_id" value="<%= @the_plantphoto.owner_id %>">
+      </div>
+
+      <div>
+        <input type="checkbox" id="cover_box" name="query_cover" value="1" <%= "checked" if @the_plantphoto.cover %>>
+
+        <label for="cover_box">
+            Cover
+        </label>
+      </div>
+
+      <button>
+        Update plantphoto
+      </button>
+    </form>
+  </div>
+</div>
+
+
+  
+    </div>
+
+    <dl>
+      <dt>
+        Image
+      </dt>
+      <dd>
+        <img src="<%= @the_plantphoto.image %>" style="width:150px;height:150px;"></img>
+      
+      </dd>
+
+      <dt>
+        Caption
+      </dt>
+      <dd>
+        <%= @the_plantphoto.caption %>
+      </dd>
+
+      <dt>
+        Plant
+      </dt>
+      <dd>
+        <%= @the_plantphoto.plant_id %>
+      </dd>
+
+      <dt>
+        Owner
+      </dt>
+      <dd>
+        <%= @the_plantphoto.owner_id %>
+      </dd>
+
+      <dt>
+        Cover
+      </dt>
+      <dd>
+        <%= @the_plantphoto.cover %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_plantphoto.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_plantphoto.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+

@@ -3,7 +3,10 @@ class PlantsController < ApplicationController
      matching_plants = @current_user.own_plants
     # matching_plants = Plant.all
 
-    @list_of_plants = matching_plants.order({ :created_at => :desc })
+    @list_of_plants = matching_plants.where({ :dead => "false" }).order({ :created_at => :desc })
+    @list_of_dead_plants = matching_plants.where({ :dead => "true" }).order({ :created_at => :desc })
+
+  
 
     render({ :template => "plants/index.html.erb" })
   end
@@ -31,7 +34,7 @@ class PlantsController < ApplicationController
     # the_plant.likes_count = params.fetch("query_likes_count")
     # the_plant.plantphotos_count = params.fetch("query_plantphotos_count")
     # the_plant.activities_count = params.fetch("query_activities_count")
-    # the_plant.dead = params.fetch("query_dead", false)
+     the_plant.dead = params.fetch("query_dead", false)
 
     if the_plant.valid?
       the_plant.save
@@ -44,17 +47,12 @@ class PlantsController < ApplicationController
   def update
     the_id = params.fetch("path_id")
     the_plant = Plant.where({ :id => the_id }).at(0)
-
+    
+    the_plant.name = params.fetch("query_name")
     the_plant.species_id = params.fetch("query_species_id")
-    the_plant.owner_id = params.fetch("query_owner_id")
+    the_plant.owner_id = @current_user.id
     the_plant.dead = params.fetch("query_dead", false)
     the_plant.room_id = params.fetch("query_room_id")
-    the_plant.name = params.fetch("query_name")
-    the_plant.water_interval = params.fetch("query_water_interval")
-    the_plant.water_next_at = params.fetch("query_water_next_at")
-    the_plant.likes_count = params.fetch("query_likes_count")
-    the_plant.plantphotos_count = params.fetch("query_plantphotos_count")
-    the_plant.activities_count = params.fetch("query_activities_count")
 
     if the_plant.valid?
       the_plant.save

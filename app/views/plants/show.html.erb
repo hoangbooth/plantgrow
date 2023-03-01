@@ -1,66 +1,32 @@
 <div>
-  <div>
-    <h1>
-      Plant #<%= @the_plant.id %> details
-    </h1>
-
-    <div>
       <div>
         <a href="/plants">
           Go back
         </a>
       </div>
-
-      <div>
-        <a href="/delete_plant/<%= @the_plant.id %>">
-          Delete plant
-        </a>
-      </div>
+  
+  <div>
+    <h1>
+      <%= @the_plant.name %>
+    </h1>
+    <h3>
+      <%= @the_plant.species.binoname %>
+    </h3>
+    <div>
+      <img src="<%= @the_plant.species.cover %>" style="width:96px;height:96px"></img>  
     </div>
 
     <dl>
       <dt>
-        Species
-      </dt>
-      <dd>
-        <%= @the_plant.species_id %>
-      </dd>
-
-      <dt>
-        Owner
-      </dt>
-      <dd>
-        <%= @the_plant.owner_id %>
-      </dd>
-
-      <dt>
-        Dead
-      </dt>
-      <dd>
-        <%= @the_plant.dead %>
-      </dd>
-
-      <dt>
         Room
       </dt>
       <dd>
-        <%= @the_plant.room_id %>
+           <% if @the_plant.room == nil %>
+            Unknown room
+          <% else %>
+            <%= @the_plant.room.roomname %>
+          <% end %>
       </dd>
-
-      <dt>
-        Likes count
-      </dt>
-      <dd>
-        <%= @the_plant.likes_count %>
-      </dd>
-
-      <dt>
-        Name
-      </dt>
-      <dd>
-        <%= @the_plant.name %>
-      </dd>
-
       <dt>
         Water interval
       </dt>
@@ -71,16 +37,9 @@
       <dt>
         Water next at
       </dt>
-      <dd>
-        <%= @the_plant.water_next_at %>
-      </dd>
-
-      <dt>
-        Likes count
-      </dt>
-      <dd>
-        <%= @the_plant.likes_count %>
-      </dd>
+        <dd>
+          <%= @the_plant.water_next_at %>
+        </dd>
 
       <dt>
         Plantphotos count
@@ -88,33 +47,243 @@
       <dd>
         <%= @the_plant.plantphotos_count %>
       </dd>
-
-      <dt>
-        Activities count
-      </dt>
-      <dd>
-        <%= @the_plant.activities_count %>
-      </dd>
-
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_plant.created_at) %> ago
-      </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_plant.updated_at) %> ago
-      </dd>
     </dl>
-  </div>
 </div>
 
 <hr>
+  <h2>
+    Care
+  </h2>
+  <dl>
+      <dt>
+        Bio
+      </dt>
+      <dd>
+        <%= @the_plant.species.about %>
+      </dd>
+      <dt>
+        Basic Instruction
+      </dt>
+      <dd>
+        <%= @the_plant.species.instruction %>
+      </dd>
+      <dt>
+        Diffculty
+      </dt>
+      <dd>
+        <%= @the_plant.species.difficulty %>
+      </dd>
 
+      <dt>
+        Water
+      </dt>
+        <dd>
+          <%= @the_plant.species.water_type %>
+        </dd>
+
+      <dt>
+        Sun
+      </dt>
+      <dd>
+        <%= @the_plant.species.sun_type %>
+      </dd>
+    </dl>
+ 
+    
+<hr>
+<div>
+  <div>
+    <h2>
+      Add a new activity
+    </h2>
+
+    <form action="/insert_activity" method="post">
+      <div>
+        <label for="care_type_box">
+          Care type
+        </label>
+
+        <select id="care_type_box" name="query_care_type">
+          <% @activity_type.each do |a_type| %>
+            <option><%= a_type %></option>
+          <% end %>
+        </select>
+
+       <%# <input type="text" id="care_type_box" name="query_care_type"> %>
+      </div>
+
+      <div>
+        <label for="note_box">
+          Note
+        </label>
+
+        <textarea id="note_box" name="query_note" rows="3"></textarea>
+      </div>
+
+      <div>
+        <input type="hidden" id="plant_id_box" name="query_plant_id" value="<%= @the_plant.id %>">
+      </div>
+
+      <div>
+        <label for="care_at_box">
+          Care at
+        </label>
+
+        <input type="datetime-local" id="care_at_box" name="query_care_at">
+      </div>
+
+      <div>
+        <input type="hidden" id="owner_id_box" name="query_owner_id" value="<%= @current_user.id %>">
+      </div>
+
+      <button>
+        Create activity
+      </button>
+    </form>
+  </div>
+</div>
+<div>
+<h3>List of Activites</h3>
+</div>
+
+<div>
+  <div>
+    <table border="1">
+      <tr>
+
+        <th>
+          Care type
+        </th>
+
+        <th>
+          Note
+        </th>
+
+        <th>
+          Care at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @the_plant.activities.each do |an_activity| %>
+      <tr>
+        <td>
+          <%= an_activity.care_type %>
+        </td>
+
+        <td>
+          <%= an_activity.note %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(an_activity.care_at) %> ago
+        </td>
+
+        <td>
+          <a href="/activities/<%= an_activity.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<br>
+
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new plantphoto
+    </h2>
+
+    <form action="/insert_plantphoto" method="post">
+      <div>
+        <label for="image_box">
+          Image
+        </label>
+
+        <input type="text" id="image_box" name="query_image">
+      </div>
+
+      <div>
+        <label for="caption_box">
+          Caption
+        </label>
+
+        <input type="text" id="caption_box" name="query_caption">
+      </div>
+
+      <div>
+        <input type="hidden" id="plant_id_box" name="query_plant_id" value="<%= @the_plant.id%>">
+      </div>
+
+      <button>
+        Create plantphoto
+      </button>
+    </form>
+  </div>
+</div>
+
+<h3>All photos</h3>
+
+<div>
+  <div>
+    <table border="1">
+      <tr>
+
+        <th>
+          Image
+        </th>
+
+        <th>
+          Caption
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @the_plant.plantphotos.each do |a_plantphoto| %>
+      <tr>
+
+        <td>
+          <img src="<%= a_plantphoto.image %>" style="width:150px;height:150px;"></img>
+        </td>
+
+        <td>
+          <%= a_plantphoto.caption %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_plantphoto.created_at) %> ago
+        </td>
+  
+
+        <td>
+          <a href="/plantphotos/<%= a_plantphoto.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+
+<br>
+<hr>
 
 <div>
   <div>
@@ -124,19 +293,25 @@
 
     <form action="/modify_plant/<%= @the_plant.id %>"  method="post" >
       <div>
+        <div>
+        <label for="name_box">
+          Your Plant Name
+        </label>
+
+        <input type="text" id="name_box" name="query_name" value="<%= @the_plant.name %>">
+      </div>
+        
         <label for="species_id_box">
           Species
         </label>
 
-        <input type="text" id="species_id_box" name="query_species_id" value="<%= @the_plant.species_id %>">
-      </div>
-
-      <div>
-        <label for="owner_id_box">
-          Owner
-        </label>
-
-        <input type="text" id="owner_id_box" name="query_owner_id" value="<%= @the_plant.owner_id %>">
+        <select id="species_id_box" name="query_species_id">
+            <% Species.all.each do |a_species| %>
+              <option value="<%= a_species.id %>">
+                <%= a_species.binoname %> (<%= a_species.nickname %>)
+              </option>
+            <% end %>
+          </select>
       </div>
 
       <div>
@@ -152,63 +327,14 @@
           Room
         </label>
 
-        <input type="text" id="room_id_box" name="query_room_id" value="<%= @the_plant.room_id %>">
-      </div>
-
-      <div>
-        <label for="likes_count_box">
-          Likes count
-        </label>
-
-        <input type="text" id="likes_count_box" name="query_likes_count" value="<%= @the_plant.likes_count %>">
-      </div>
-
-      <div>
-        <label for="name_box">
-          Name
-        </label>
-
-        <input type="text" id="name_box" name="query_name" value="<%= @the_plant.name %>">
-      </div>
-
-      <div>
-        <label for="water_interval_box">
-          Water interval
-        </label>
-
-        <input type="text" id="water_interval_box" name="query_water_interval" value="<%= @the_plant.water_interval %>">
-      </div>
-
-      <div>
-        <label for="water_next_at_box">
-          Water next at
-        </label>
-
-        <input type="date" id="water_next_at_box" name="query_water_next_at" value="<%= @the_plant.water_next_at %>">
-      </div>
-
-      <div>
-        <label for="likes_count_box">
-          Likes count
-        </label>
-
-        <input type="text" id="likes_count_box" name="query_likes_count" value="<%= @the_plant.likes_count %>">
-      </div>
-
-      <div>
-        <label for="plantphotos_count_box">
-          Plantphotos count
-        </label>
-
-        <input type="text" id="plantphotos_count_box" name="query_plantphotos_count" value="<%= @the_plant.plantphotos_count %>">
-      </div>
-
-      <div>
-        <label for="activities_count_box">
-          Activities count
-        </label>
-
-        <input type="text" id="activities_count_box" name="query_activities_count" value="<%= @the_plant.activities_count %>">
+         <select id="room_id_box" name="query_room_id">
+            <% Room.all.each do |a_room| %>
+              <option value="<%= a_room.id %>">
+                <%= a_room.roomname %> (<%= a_room.roomtype %>)
+              </option>
+            <% end %>
+          </select>
+       
       </div>
 
       <button>
@@ -219,3 +345,12 @@
 </div>
 
 <hr>
+      
+<br>
+
+
+      <div>
+        <a href="/delete_plant/<%= @the_plant.id %>">
+          Delete plant
+        </a>
+      </div>

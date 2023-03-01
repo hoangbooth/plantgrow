@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action(:load_current_user)
-  
+  before_action(:load_room_type)
+  before_action(:load_activity_type)
   # Uncomment line 5 in this file and line 3 in UserAuthenticationController if you want to force users to sign in before any other actions.
   # before_action(:force_user_sign_in)
   
@@ -10,6 +11,18 @@ class ApplicationController < ActionController::Base
     @current_user = User.where({ :id => the_id }).first
   end
   
+  def load_room_type
+    @room_type = Array.new
+    @room_type = ["Balcony", "Bathroom", "Bedroom", "Dining Room", "Hall", "Kitchen"]
+  end
+
+  def load_activity_type
+    @activity_type = Array.new
+    @activity_type = ["Water", "Fertilize", "Repot", "Mist", "Rotate"]
+  end
+
+
+
   def force_user_sign_in
     if @current_user == nil
       redirect_to("/user_sign_in", { :notice => "You have to sign in first." })
