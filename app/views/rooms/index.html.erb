@@ -42,15 +42,17 @@
     </form>
   </div>
 </div>
-
+<br>
 <hr>
 <div>
+  <h2>
+    List of my rooms
+  </h2>
+
   <div>
     <table border="1">
       <tr>
-        <th>
-          ID
-        </th>
+      
 
         <th>
           Roomtype
@@ -58,14 +60,6 @@
 
         <th>
           Roomname
-        </th>
-
-        <th>
-          Owner
-        </th>
-
-        <th>
-          Created at
         </th>
 
         <th>
@@ -78,9 +72,7 @@
 
       <% @list_of_rooms.each do |a_room| %>
       <tr>
-        <td>
-          <%= a_room.id %>
-        </td>
+     
 
         <td>
           <%= a_room.roomtype %>
@@ -90,13 +82,6 @@
           <%= a_room.roomname %>
         </td>
 
-        <td>
-          <%= a_room.owner_id %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(a_room.created_at) %> ago
-        </td>
         <td>
           <%= time_ago_in_words(a_room.updated_at) %> ago
         </td>

@@ -42,7 +42,7 @@
         </dd>
 
       <dt>
-        Plantphotos count
+        Number of Photos Taken
       </dt>
       <dd>
         <%= @the_plant.plantphotos_count %>
@@ -93,9 +93,10 @@
 <hr>
 <div>
   <div>
-    <h2>
+    <h2>ACTIVITIES</h2>
+    <h3>
       Add a new activity
-    </h2>
+    </h3>
 
     <form action="/insert_activity" method="post">
       <div>
@@ -199,9 +200,10 @@
 
 <div>
   <div>
-    <h2>
+    <h2>PHOTOS</h2>
+    <h3>
       Add a new plantphoto
-    </h2>
+    </h3>
 
     <form action="/insert_plantphoto" method="post">
       <div>
@@ -231,7 +233,7 @@
   </div>
 </div>
 
-<h3>All photos</h3>
+<h3>All photos (<%= @the_plant.plantphotos_count %>)</h3> 
 
 <div>
   <div>
@@ -306,7 +308,11 @@
         </label>
 
         <select id="species_id_box" name="query_species_id">
-            <% Species.all.each do |a_species| %>
+            
+            <option value="<%= @the_plant.species.id %>" selected>
+              <%= @the_plant.species.binoname %> (<%= @the_plant.species.nickname %>)
+            </option>
+            <% Species.where.not({:id => @the_plant.species.id}).each do |a_species| %>
               <option value="<%= a_species.id %>">
                 <%= a_species.binoname %> (<%= a_species.nickname %>)
               </option>
@@ -314,13 +320,7 @@
           </select>
       </div>
 
-      <div>
-        <input type="checkbox" id="dead_box" name="query_dead" value="1" <%= "checked" if @the_plant.dead %>>
-
-        <label for="dead_box">
-            Dead
-        </label>
-      </div>
+      
 
       <div>
         <label for="room_id_box">
@@ -328,7 +328,12 @@
         </label>
 
          <select id="room_id_box" name="query_room_id">
-            <% Room.all.each do |a_room| %>
+            
+            <option value="<%= @the_plant.room.id %>" selected>
+              <%= @the_plant.room.roomname %> (<%= @the_plant.room.roomtype %>)
+            </option>
+            
+            <% Room.where.not({:id => @the_plant.room.id}).each do |a_room| %>
               <option value="<%= a_room.id %>">
                 <%= a_room.roomname %> (<%= a_room.roomtype %>)
               </option>
@@ -337,6 +342,13 @@
        
       </div>
 
+        <div>
+        <input type="checkbox" id="dead_box" name="query_dead" value="1" <%= "checked" if @the_plant.dead %>>
+
+        <label for="dead_box">
+            Dead
+        </label>
+      </div>
       <button>
         Update plant
       </button>

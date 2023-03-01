@@ -39,7 +39,7 @@ class RoomsController < ApplicationController
 
     the_room.roomtype = params.fetch("query_roomtype")
     the_room.roomname = params.fetch("query_roomname")
-    the_room.owner_id = params.fetch("query_owner_id")
+    the_room.owner_id = @current_user.id
 
     if the_room.valid?
       the_room.save
