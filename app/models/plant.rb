@@ -29,6 +29,17 @@ class Plant < ApplicationRecord
   has_many(:followers, { :through => :owner, :source => :following })
   has_many(:fan_followers, { :through => :fans, :source => :following })
 
+  def plant_cover
+    array_of_photo = self.plantphotos
+    newest_photo = array_of_photo.at(0)
 
+    if newest_photo == nil 
+      plant_cover = self.species.cover
+    else
+      plant_cover = newest_photo.image
+    end
+    return plant_cover
+ 
+  end 
 
 end

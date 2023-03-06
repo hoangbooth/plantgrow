@@ -1,0 +1,47 @@
+<div >
+  <h5>
+    My Profile
+  </h5>
+
+<div>
+  <%= @current_user.username %>
+</div>
+
+<div>
+  <img src="<%= @current_user.profilepic %>" style="width:50px;height:50px;"></img>
+</div>
+
+<div>
+  <b><%= @current_user.name %></b>
+</div>
+
+<div>
+  <%= @current_user.bio %>
+</div>
+
+<div>
+  <i><%= @current_user.city %></i>
+</div>
+
+<div>
+  <table border="1">
+    <tr>
+      <th>Plants</th>
+      <th>Photos</th>
+      <th>Activities</th>
+    <tr>
+    <tr>
+      <td><%= @current_user.own_plants.count %></td>
+      <td><%= @current_user.plantphotos.count %></td>
+      <td><%= @current_user.activities.count %></td>
+    <tr>
+  </table>
+</div>
+
+<div>
+
+</div>
+
+<div>
+
+</div>

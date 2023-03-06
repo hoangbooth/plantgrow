@@ -3,6 +3,9 @@ class PlantsController < ApplicationController
   
   
   def index
+
+
+
     render({ :template => "plants/index.html.erb" })
   end
 

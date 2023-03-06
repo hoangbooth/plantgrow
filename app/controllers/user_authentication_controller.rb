@@ -1,6 +1,7 @@
 class UserAuthenticationController < ApplicationController
   # Uncomment line 3 in this file and line 5 in ApplicationController if you want to force users to sign in before any other actions.
-  # skip_before_action(:force_user_sign_in, { :only => [:sign_up_form, :create, :sign_in_form, :create_cookie] })
+  skip_before_action(:force_user_sign_in, { :only => [:sign_up_form, :create, :sign_in_form, :create_cookie, :random_plant] })
+ 
 
   def sign_in_form
     render({ :template => "user_authentication/sign_in.html.erb" })
@@ -69,6 +70,24 @@ class UserAuthenticationController < ApplicationController
     render({ :template => "user_authentication/edit_profile.html.erb" })
   end
 
+  def view_my_profile
+    render({ :template => "user_authentication/my_profile.html.erb" })
+  end
+
+  def upload_profile_pic
+    @user = @current_user
+    @user.profilepic = params.fetch("profilepic")
+    @user.save
+    if @user.valid?
+      @user.save
+
+      redirect_to("/edit_user_profile", { :notice => "User account updated successfully."})
+    else
+      render({ :template => "user_authentication/edit_profile_with_errors.html.erb" , :alert => @user.errors.full_messages.to_sentence })
+    end
+
+  end
+
   def update
     @user = @current_user
     @user.email = params.fetch("query_email")
@@ -78,20 +97,19 @@ class UserAuthenticationController < ApplicationController
     @user.bio = params.fetch("query_bio")
     @user.city = params.fetch("query_city")
     @user.name = params.fetch("query_name")
-    @user.profilepic = params.fetch("query_profilepic")
     @user.private = params.fetch("query_private", false)
-    @user.sent_follow_requests_count = params.fetch("query_sent_follow_requests_count")
-    @user.received_follow_requests_count = params.fetch("query_received_follow_requests_count")
-    @user.own_plants_count = params.fetch("query_own_plants_count")
-    @user.plantphotos_count = params.fetch("query_plantphotos_count")
-    @user.activities_count = params.fetch("query_activities_count")
+    # @user.sent_follow_requests_count = params.fetch("query_sent_follow_requests_count")
+    # @user.received_follow_requests_count = params.fetch("query_received_follow_requests_count")
+    # @user.own_plants_count = params.fetch("query_own_plants_count")
+    # @user.plantphotos_count = params.fetch("query_plantphotos_count")
+    # @user.activities_count = params.fetch("query_activities_count")
     
     if @user.valid?
       @user.save
 
-      redirect_to("/", { :notice => "User account updated successfully."})
+      redirect_to("/edit_user_profile", { :notice => "User account updated successfully."})
     else
-      render({ :template => "user_authentication/edit_profile_with_errors.html.erb" , :alert => @user.errors.full_messages.to_sentence })
+      redirect_to("/edit_user_profile",{ :alert => @user.errors.full_messages.to_sentence })
     end
   end
 
@@ -102,4 +120,12 @@ class UserAuthenticationController < ApplicationController
     redirect_to("/", { :notice => "User account cancelled" })
   end
  
+
+  def random_plant
+    @all_species = Species.all
+    @random_plant = @all_species.sample
+    render({ :template => "index.html.erb"})
+  end
+
+
 end

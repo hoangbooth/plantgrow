@@ -1,6 +1,7 @@
 class ActivitiesController < ApplicationController
   before_action(:force_user_sign_in)
 
+  #Activities Type: Load in Application Controller
 
   def index
     if @current_user.id != 1

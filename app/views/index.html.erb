@@ -35,9 +35,9 @@
         <label for="care_type_box">
               Select your task
             </label>
-
+            <%# Select activity type from application controller %>
             <select id="care_type_box" name="query_care_type">
-              <% @activity_type.each do |a_type| %>
+              <% @activity_type_home.each do |a_type| %>
                 <option><%= a_type %></option>
               <% end %>
             </select>
@@ -48,15 +48,19 @@
         
         
         </div>
+        Select your plants to apply task
         <table border="1">
           <% @list_of_plants.each do |a_plant| %>
           <tr>
               <td>
-              <img src="<%= a_plant.species.cover %>" style="width:48px;height:48px"></img>
+              <img src="<%= a_plant.plant_cover %>" style="width:48px;height:48px"></img>
             </td>
             <td>
-              <label for="<%= a_plant.id %>"></label>
-              <%= a_plant.name %>
+              <label for="<%= a_plant.id %>">
+                <a href = "/plants/<%= a_plant.id %>">
+                  <%= a_plant.name %>
+                </a>
+              </label>
             </td>
             <td>
               <input type="checkbox" id="<%= a_plant.id %>" name="<%= a_plant.id.to_s %>" value="yes">

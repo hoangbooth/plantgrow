@@ -367,10 +367,7 @@
 <br>
 
 
-      <div>
-        <a href="/delete_plant/<%= @the_plant.id %>">
-          Delete plant
-        </a>
-      </div>
+ <%# See old type of delete plant in the backup.html.erb %>
+ <%# Below is the new type of delete plant with confirmation from Javascript %>
 
-      <%= link_to "Delete plant 2", "/", data: { confirm: "Are you sure" } %>
+      <%= link_to "Delete plant ", "/", data: { confirm: "Are you sure? You will never get your plant back again. If your plant is dead, you can choose Dead from Edit Plant instead of Deleting Plant" } %>

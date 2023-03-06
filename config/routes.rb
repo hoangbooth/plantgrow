@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  get("/", { :controller => "application", :action => "index" })
+
 
   # Routes for the Like resource:
 
@@ -120,6 +120,11 @@ Rails.application.routes.draw do
 
   # Routes for the User account:
 
+  # Random Plant at Home Page
+  get("/", { :controller => "user_authentication", :action => "random_plant" })
+
+  get("/my_profile", { :controller => "user_authentication", :action => "view_my_profile"})
+
   # SIGN UP FORM
   get("/user_sign_up", { :controller => "user_authentication", :action => "sign_up_form" })        
   # CREATE RECORD
@@ -132,6 +137,10 @@ Rails.application.routes.draw do
   
   # DELETE RECORD
   get("/cancel_user_account", { :controller => "user_authentication", :action => "destroy" })
+
+
+ # CREATE PROFILE PIC
+ post("/insert_profile_pic", { :controller => "user_authentication", :action => "upload_profile_pic" })
 
   # ------------------------------
 
