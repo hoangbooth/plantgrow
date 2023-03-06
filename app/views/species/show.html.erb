@@ -30,7 +30,7 @@
         Cover
       </dt>
       <dd>
-       <img src="<%= @the_species.cover %>" style="width:128px;height:128px"></img>
+       <img src="<%= @the_species.cover %>" style="width:300px;height:300px"></img>
       </dd>
 
       <dt>
@@ -115,7 +115,7 @@
       Edit species
     </h2>
 
-    <form action="/modify_species/<%= @the_species.id %>"  method="post" >
+    <form action="/modify_species/<%= @the_species.id %>"  method="post" class="form-horizontal" enctype="multipart/form-data">
       <div>
         <label for="nickname_box">
           Nickname
@@ -126,10 +126,10 @@
 
       <div>
         <label for="cover_box">
-          Cover
+          Change Cover
         </label>
-
-        <input type="text" id="cover_box" name="query_cover" value="<%= @the_species.cover %>">
+        <input type="file" id="cover_box" name="query_cover" class="form-control">
+        <%#input type="text" id="cover_box" name="query_cover" value="<%= @the_species.cover ">%>
       </div>
 
       <div>

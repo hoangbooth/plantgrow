@@ -14,7 +14,7 @@
       Add a new species
     </h2>
 
-    <form action="/insert_species" method="post">
+    <form action="/insert_species" method="post" class="form-horizontal" enctype="multipart/form-data">
       <div>
         <label for="nickname_box">
           Nickname
@@ -27,8 +27,8 @@
         <label for="cover_box">
           Cover
         </label>
-
-        <input type="text" id="cover_box" name="query_cover">
+        <input type="file" id="cover_box" name="query_cover" class="form-control">
+        <%#input type="text" id="cover_box" name="query_cover">%>
       </div>
 
       <div>

@@ -58,7 +58,11 @@
   </h5>
   <div>
   
-    <img src="<%= @current_user.profilepic %>" style="width:50px;height:50px;"></img>
+     <% if @current_user.profilepic.blank? %>  
+      <img src="https://res-2.cloudinary.com/ddzomkra2/image/upload/v1678090744/ktjyf7subhvr3razsbud.png" style="width:50px;height:50px;"></img>   
+  <% else %>
+   <img src="<%= @current_user.profilepic %>" style="width:50px;height:50px;"></img>
+  <% end %>
   </div>
   <div>
     <form action="/insert_profile_pic" method="post" class="form-horizontal" enctype="multipart/form-data">

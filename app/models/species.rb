@@ -24,4 +24,7 @@ class Species < ApplicationRecord
   validates(:binoname, { :presence => { :message => "can't be blank" } })
   validates(:binoname, { :uniqueness => { :message => "has already been taken" } })
 
+
+  mount_uploader :cover, CoverUploader
+
 end

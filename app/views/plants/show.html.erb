@@ -13,7 +13,7 @@
       <%= @the_plant.species.binoname %>
     </h3>
     <div>
-      <img src="<%= @the_plant.species.cover %>" style="width:96px;height:96px"></img>  
+      <img src="<%= @the_plant.species.cover %>" style="width:150px;height:150px"></img>  
     </div>
 
     <dl>
@@ -27,19 +27,7 @@
             <%= @the_plant.room.roomname %>
           <% end %>
       </dd>
-      <dt>
-        Water interval
-      </dt>
-      <dd>
-        <%= @the_plant.water_interval %>
-      </dd>
-
-      <dt>
-        Water next at
-      </dt>
-        <dd>
-          <%= @the_plant.water_next_at %>
-        </dd>
+      
 
       <dt>
         Number of Photos Taken

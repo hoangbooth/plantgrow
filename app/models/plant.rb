@@ -30,7 +30,7 @@ class Plant < ApplicationRecord
   has_many(:fan_followers, { :through => :fans, :source => :following })
 
   def plant_cover
-    array_of_photo = self.plantphotos
+    array_of_photo = self.plantphotos.order({ :created_at => :desc })
     newest_photo = array_of_photo.at(0)
 
     if newest_photo == nil 

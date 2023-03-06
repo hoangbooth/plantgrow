@@ -43,6 +43,8 @@ class UserAuthenticationController < ApplicationController
     @user.password = params.fetch("query_password")
     @user.password_confirmation = params.fetch("query_password_confirmation")
     @user.username = params.fetch("query_username")
+    @user.private = false
+    # @user.profilepic = "https://res-2.cloudinary.com/ddzomkra2/image/upload/v1678090744/ktjyf7subhvr3razsbud.png"
     
     # @user.bio = params.fetch("query_bio")
     # @user.city = params.fetch("query_city")

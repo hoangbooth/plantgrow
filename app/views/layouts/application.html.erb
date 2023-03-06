@@ -63,6 +63,22 @@
               Sign out
             </a>
           </li>
+
+   <li>
+          <a href="/edit_user_profile">
+            Edit Profile
+          </a>
+        </li>
+         <li>
+          <a href="/my_profile">
+            My Profile
+          </a>
+        </li>
+</ul>
+
+<h3>My Garden</h3>
+
+      <ul>
           <li>
             <a href="/plants">
                <%= @current_user.username %> 's Plants
@@ -73,18 +89,9 @@
             My rooms
           </a>
         </li>
-        <li>
-          <a href="/edit_user_profile">
-            Edit Profile
-          </a>
-        </li>
-         <li>
-          <a href="/my_profile">
-            My Profile
-          </a>
-        </li>
+    </ul> 
       
-</ul>
+
      
 
   <% if @current_user.id == 1 %>
